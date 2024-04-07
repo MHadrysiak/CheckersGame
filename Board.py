@@ -19,26 +19,6 @@ class Board:
         self.__white_turn = True  # move indicator
         self.__draw = 0  # draw indicator
         self.__board = [[Field.empty for _ in range(8)] for _ in range(8)]  # 8x8 board
-        # self.__board[0][7] = Field.white_king
-        # self.__board[2][5] = Field.black
-        # # self.__board[3][0] = Field.black
-        # self.__board[7][0] = Field.black
-        # self.__board[4][1] = Field.black
-        # self.__board[6][1] = Field.black
-        # self.__board[7][2] = Field.black
-        # self.__board[0][3] = Field.black
-        # self.__board[2][3] = Field.black
-        # self.__board[4][3] = Field.black
-        # self.__board[6][3] = Field.white
-        # self.__board[1][6] = Field.white
-        # self.__board[3][6] = Field.white
-        # self.__board[5][6] = Field.white
-        # self.__board[7][6] = Field.white
-        # self.__board[0][7] = Field.white
-        # self.__board[2][7] = Field.white
-        # self.__board[4][7] = Field.white
-        # self.__board[6][7] = Field.white
-        # self.__white_turn = False
         for row in range(Const.ROW):
             for col in range(Const.COL):
                 if (row+col)%2:
