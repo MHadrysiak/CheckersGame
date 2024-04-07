@@ -50,14 +50,10 @@ class AI:
     def minmax(self, current_depth, node, alpha, beta, is_maximizing):
         best_node = None
         if current_depth == self.depth:
-            # print(alpha)
-            # print(beta)
-            # print("here???")
             return self.get_score(node.get_value()), None
 
 
         if not node.is_external():
-            # print("AAA")
             minmax_score = Const.SCORE_LOST-1 if is_maximizing else Const.SCORE_WIN+1
             for child in node.get_children():
                 score, _ = self.minmax(current_depth+1, child, alpha, beta, not is_maximizing)
@@ -72,8 +68,6 @@ class AI:
                         beta = min(beta, score)
                         best_node = child
 
-                # if beta <= alpha:
-                #     break
             return score, best_node
         else:
             _, moves = node.get_value().count_moves()
@@ -85,9 +79,7 @@ class AI:
                 for move in moves:
                     new_board = deepcopy(node.get_value())
 
-                    # print(f"move: {move}")
                     for m in move:
-                        # print(m)
                         start, end = m
                         start_col, start_row = start
                         end_col, end_row = end
@@ -107,8 +99,6 @@ class AI:
 
                     if beta <= alpha:
                         break
-                # print("kurwa")
-                # print(best_node)
                 return minmax_score, best_node
             else:
                 return self.get_score(node.get_value()), best_node
@@ -124,14 +114,7 @@ class AI:
                 self.tree = Tree(deepcopy(self.board))
         
         _, node = self.minmax(0, self.tree, Const.SCORE_LOST, Const.SCORE_WIN, True)
-        # start_col, start_row, end_col, end_row = move
-        # self.board.move(start_col, start_row, end_col, end_row)
-        # print(node is self.tree)
-        # print(self.board.get_turn())
         self.board.change_board(node.get_value())
-        # print(self.board.get_turn())
-        # self.board.print_board()
-        # print(len(self.tree.get_children()))
         self.tree = self.tree.cut_tree(self.board.get_board())
         
 
@@ -142,6 +125,5 @@ if __name__ == "__main__":
     b1 = Board()
     ai = AI(b1, depth=6)
     t1 = TUIController(b1, ai,True)
-    # ai.play()
     t1.play()
 
